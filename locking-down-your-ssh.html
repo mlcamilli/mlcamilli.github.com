@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Matt Camilli</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">  
+        <link href="/theme/css/bootstrap.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                      <h1>Matt Camilli's Blog<small>  It's something</small></h1>
+                </div>
+                <div class="col-lg-3">
+                    <ul class="nav nav-pills" style="padding-top:15px">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About Me</a></li>
+                        <li><a href="https://github.com/mlcamilli" target="_blank">Github</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row marketing">
+                <div class="col-lg-8">
+	 <h2>Locking down your ssh</h2>
+	<h4>Written on 2010-12-03 10:20:00</h4>
+	<p><p>So SSH is great, I use it just about everyday. I ssh into my linode as root like a baus
+and use password authentication because no one is gonna guess my password which is my 
+last name twice, right?</p>
+<p>Okay that isn't what I do but it is so embarassingly close to what I used to do. Then after I
+read a blog post about someone else's box getting hacked because their SSH wasn't secure, I quickly 
+changed my tune. I can't risk having my linode hacked, WHAT WOULD HAPPEN TO MY MINECRAFT SERVER?!</p>
+<p>So how do you go about doing just that? Well for starters you are going to want to use key
+authentication because it is essentially better in every respect. </p>
+<p>If you don't have an ssh key on your computer, go <a href="https://help.github.com/articles/generating-ssh-keys">here</a> and do that. (Thanks github for the step by step)</p>
+<p>Then you will want to add that key toyour servers authorized key file by doing this</p>
+<div class="highlight"><pre><span class="n">mkdir</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span>
+<span class="n">echo</span> <span class="s">&quot;yourpublickey&quot;</span> <span class="o">&gt;</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+</pre></div>
+
+
+<p>Next you will want to put these settings in your ssh config file : </p>
+<div class="highlight"><pre><span class="n">PermitRootLogin</span> <span class="n">no</span>
+<span class="n">PermitEmptyPasswords</span> <span class="n">no</span>
+<span class="n">PasswordAuthentication</span> <span class="n">no</span>
+<span class="n">AllowUsers</span> <span class="n">youruser</span>
+</pre></div>
+
+
+<p>And then restart the ssh server</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">ssh</span> <span class="n">restart</span>
+</pre></div>
+
+
+<p>Voila! Your server just became significantly harder to break into.</p></p>
+	<strong>Tags:</strong> <a href="tag/devops.html">devops </a><a href="tag/ssh.html">ssh </a>	<hr \>
+                </div>
+
+                <div class="col-lg-3 well">
+                    <img src="/theme/img/upload.png" style="width:100%"></img>
+                    <br><br>
+                    <p>Software Engineer, Gamer, Cyclist, Bearded Lover</p>
+                    <a href="/category/devops.html">DevOps <span class="badge">2</span></a>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>&copy; Caffeinated Coders 2013</p>
+            </div>
+
+        </div> 
+    </body>
+</html>
