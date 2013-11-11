@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        {% endblock %}
+        <title>{%block title%}Matt Camilli{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">  
+        <link href="{{ SITEURL }}/theme/css/bootstrap.css" rel="stylesheet">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                      <h1>Matt Camilli's Blog<small>  It's something</small></h1>
+                </div>
+                <div class="col-lg-3">
+                    <ul class="nav nav-pills" style="padding-top:15px">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about.html">About Me</a></li>
+                        <li><a href="https://github.com/mlcamilli" target="_blank">Github</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row marketing">
+                <div class="col-lg-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+                <div class="col-lg-3 well">
+                    <img src="{{ SITEURL }}/theme/img/upload.png" style="width:100%"></img>
+                    <br><br>
+                    <p>Software Engineer, Gamer, Cyclist, Bearded Lover</p>
+                    {% for category in categories %}
+                    <a href="{{SITEURL}}/{{category.0.url}}">{{category.0}} <span class="badge">{{category.1|length}}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>&copy; Caffeinated Coders 2013</p>
+            </div>
+
+        </div> 
+    </body>
+</html>

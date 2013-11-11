@@ -1,0 +1,17 @@
+*.pyc
+*.pyo
+*~
+.DS_Store
+.env
+.vfenv
+.venv
+.Python
+.foreman
+.coverage
+*.vagrant*
+*.sublime-*
+*.sqlite3*
+
+
+__pycache__
+output
