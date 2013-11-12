@@ -4,6 +4,7 @@ Category: DevOps
 Tags: devops, fail2ban
 Slug: fail2ban-how-I-can-sleep-at-night
 Author: Matt Camilli
+Description: How to set up fail2ban to stop those pesky brute force hackers from ruining your day.
 
 It was a casual day at the TrackMaven office when I just so happened to peruse through the logs
 on our linode servers. To my dismay I saw a lot of this:

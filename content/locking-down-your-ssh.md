@@ -4,6 +4,7 @@ Category: DevOps
 Tags: devops, ssh
 Slug: locking-down-your-ssh
 Author: Matt Camilli
+Description:So SSH is great, I use it just about everyday. I ssh into my linode as root like a baus and use password authentication because no one is gonna guess my password which is my last name twice, right?
 
 So SSH is great, I use it just about everyday. I ssh into my linode as root like a baus
 and use password authentication because no one is gonna guess my password which is my 
