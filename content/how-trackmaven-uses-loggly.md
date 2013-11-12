@@ -4,5 +4,4 @@ Category: DevOps
 Tags: devops, loggly, json-logging
 Slug: how-trackmaven-uses-loggly
 Author: Matt Camilli
-Summary: Loggly is the greatest!
 
