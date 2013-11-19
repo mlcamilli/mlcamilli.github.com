@@ -2,7 +2,7 @@ Title: Fish for a better shell
 Date: 2013-11-19 10:20
 Category: Developer Tools
 Tags: fish, shell, bash
-Slug: fish-a-better-shell
+Slug: fish-for-a-better-shell
 Author: Matt Camilli
 Description:Put some power into your shell and upgrade to fish. http://fishshell.com/
 
