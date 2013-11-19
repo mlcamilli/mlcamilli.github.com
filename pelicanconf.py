@@ -34,4 +34,4 @@ THEME = "themes/camillitheme"
 
 TEMPLATE_PAGES = {'extra/about.html': 'about.html'}
 
-ARTICLE_EXCLUDES = (('pages','extra'))
+ARTICLE_EXCLUDES = (('pages','extra','drafts'))

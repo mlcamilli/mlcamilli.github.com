@@ -38,6 +38,7 @@
                     <p>Software Engineer, Gamer, Cyclist, Bearded Lover</p>
                     {% for category in categories %}
                     <a href="{{SITEURL}}/{{category.0.url}}">{{category.0}} <span class="badge">{{category.1|length}}</span></a>
+                    <br>
                     {% endfor %}
                 </div>
             </div>
