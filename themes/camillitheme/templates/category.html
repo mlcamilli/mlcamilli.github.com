@@ -7,7 +7,7 @@
 	<h2>{{category}} blog posts</h2>
 	{% for article in articles %}
 	    <h2><a href="{{ SITEURL }}/{{article.url}}">{{article.title}}</a></h2>
-	    <h4>Written on {{article.date}}</h4>
+	    <h4>Written on {{article.date.strftime('%B %d, %Y')}}</h4>
 	    <p>{{article.summary}}</p>
 	    <hr \>
 	{% endfor %}
