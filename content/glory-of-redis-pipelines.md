@@ -6,9 +6,6 @@ Slug: glory-of-redis-pipelines
 Author: Matt Camilli
 Description: Save yourself and your app a lot of overhead and connection time by using pipelines to drastically increase performance.
 
-    :::py
-    import test
-
 Like most python developers, and developers in general, I use Redis for pretty much everything. It is the developer's
 swiss army knife and boy does it get the job done. 
 
@@ -18,7 +15,6 @@ almost instantly was the performance hit we were taking in just redis connection
 A basic redis implementation may look something like this
 
     :::python
-
 	import redis
 
 	r = redis.StrictRedis(host='localhost', port=6379, db=0)
