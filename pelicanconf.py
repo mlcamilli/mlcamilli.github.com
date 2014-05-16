@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Matt Camilli'
 SITENAME = 'MattCamilli'
 SITEURL = ''
-
+PATH = 'content'
 TIMEZONE = 'US/Eastern'
 
 DEFAULT_LANG = 'en'

@@ -6,6 +6,9 @@ Slug: glory-of-redis-pipelines
 Author: Matt Camilli
 Description: Save yourself and your app a lot of overhead and connection time by using pipelines to drastically increase performance.
 
+    :::py
+    import test
+
 Like most python developers, and developers in general, I use Redis for pretty much everything. It is the developer's
 swiss army knife and boy does it get the job done. 
 
@@ -14,13 +17,16 @@ almost instantly was the performance hit we were taking in just redis connection
 
 A basic redis implementation may look something like this
 
+    :::python
+
 	import redis
 
 	r = redis.StrictRedis(host='localhost', port=6379, db=0)
 	value = r.get('somekey')
 
 Or in our case, we had to get a bunch of specific keys out of a HashSet
-	
+
+	:::py
 	keys = ['01102014', '01112014', '01122014', '01132014', '01142014', '01152014', '01162014']
 	values = []
 	for key in keys:
@@ -35,6 +41,7 @@ to the redis server in a single request.
 
 So taking our previous example we refactored to make it look like this
 
+    :::python
 	keys = ['01102014', '01112014', '01122014', '01132014', '01142014', '01152014', '01162014']
 	pipe = r.pipeline()
 	for key in keys:
