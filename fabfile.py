@@ -49,6 +49,14 @@ def cf_upload():
           '-K {cloudfiles_api_key} '
           'upload -c {cloudfiles_container} .'.format(**env))
 
+
+def push():
+    rebuild()
+    local('git push origin master:source')
+    local('ghp-import {}'.format(env.deploy_path))
+    local('git push origin gh-pages:master --force')
+
+
 @hosts(production)
 def publish():
     local('pelican -s publishconf.py')
