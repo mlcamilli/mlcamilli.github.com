@@ -28,6 +28,7 @@ def clean():
 
 def build():
     local('pelican -s pelicanconf.py')
+    local("echo 'mattcamilli.com' > {}/CNAME".format(env.deploy_path))
 
 
 def rebuild():
@@ -79,6 +80,7 @@ def drafts():
     drafts = sorted(os.listdir('content/drafts/'))
     for count, draft in enumerate(drafts):
         print '{}: {}'.format(count, draft)
+
 
 def finish(draft_number):
     drafts = sorted(os.listdir('content/drafts/'))
