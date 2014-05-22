@@ -32,6 +32,9 @@ THEME = "themes/camillitheme"
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-TEMPLATE_PAGES = {'extra/about.html': 'about.html'}
+TEMPLATE_PAGES = {
+    'extra/about.html': 'about.html',
+    'extra/robots.txt': 'robots.txt'
+}
 
 ARTICLE_EXCLUDES = (('pages','extra','drafts'))

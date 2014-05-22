@@ -29,6 +29,7 @@ def clean():
 def build():
     local('pelican -s pelicanconf.py')
     local("echo 'mattcamilli.com' > {}/CNAME".format(env.deploy_path))
+    local("python sitemap.py")
 
 
 def rebuild():

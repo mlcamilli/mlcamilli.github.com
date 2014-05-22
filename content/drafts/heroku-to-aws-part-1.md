@@ -4,8 +4,8 @@ Category: DevOps
 Tags: aws, heroku, supervisor, foreman
 Slug: heroku-to-aws-part-1
 Author: Matt Camilli
-Description: Migrating from a managed heroku environment to our custom
-AWS platform was a bit of a hassle, here is how we did it. 
+Description: Migrating from a managed Heroku environment to our custom
+AWS platform was a bit of a hassle, here is how we did it. :
 
 As TrackMaven scaled it became more and more apparent that we needed a more
 custom solution for our platform. Now before I really dive into this blog post
