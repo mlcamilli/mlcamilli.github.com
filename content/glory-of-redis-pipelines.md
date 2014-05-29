@@ -1,5 +1,5 @@
 Title: The Glory of Redis Pipelines 
-Date: 2014-01-23 5:20 PM
+Date: 2014-01-23
 Category: Python
 Tags: python, redis, pipeline
 Slug: glory-of-redis-pipelines

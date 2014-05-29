@@ -1,5 +1,5 @@
 Title: Heroku to AWS Part 1: Boto, Fabric, and Ansible Oh My!
-Date: 2014-05-19 01:09 PM
+Date: 2014-05-19
 Category: DevOps
 Tags: aws, heroku, supervisor, foreman
 Slug: heroku-to-aws-part-1

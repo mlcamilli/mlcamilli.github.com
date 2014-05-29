@@ -1,5 +1,5 @@
 Title: Testing External APIs in Django
-Date: 2014-05-21 02:54 PM
+Date: 2014-05-21
 Category: Best Practices
 Tags: django, api, testing, continuous integration
 Slug: testing-external-apis-in-django

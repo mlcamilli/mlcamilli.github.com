@@ -78,7 +78,7 @@ def new(article_name):
     with open('content/drafts/{}'.format(filename), 'w') as writer:
         writer.write('Title: {}\n'.format(article_name))
         writer.write('Date: {}\n'.format(timezone('US/Eastern').localize(
-            datetime.now()).strftime('%Y-%m-%d %I:%M %p')))
+            datetime.now()).strftime('%Y-%m-%d')))
         writer.write('Category: \n')
         writer.write('Tags: \n')
         writer.write('Slug: {}\n'.format(slug))

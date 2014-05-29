@@ -1,5 +1,5 @@
 Title: Heroku to AWS Part 2
-Date: 2014-05-19 04:39 PM
+Date: 2014-05-19
 Category: 
 Tags: 
 Slug: heroku-to-aws-part-2

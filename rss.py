@@ -45,7 +45,7 @@ def _get_post_details(text):
 
 def rss():
     lastmod = timezone('US/Eastern').localize(
-        datetime.now()).strftime('%Y-%m-%d %I:%M %p')
+        datetime.now()).strftime('%Y-%m-%d')
     with open(OUTPUT_DIR + 'rss.xml', 'w') as feed:
         feed.seek(0)
         items = []
