@@ -26,10 +26,19 @@ def clean():
         local('mkdir {deploy_path}'.format(**env))
 
 
+def sitemap():
+    local("python sitemap.py")
+
+
+def rss():
+    local("python rss.py")
+
+
 def build():
     local('pelican -s pelicanconf.py')
     local("echo 'mattcamilli.com' > {}/CNAME".format(env.deploy_path))
-    local("python sitemap.py")
+    rss()
+    sitemap()
 
 
 def rebuild():

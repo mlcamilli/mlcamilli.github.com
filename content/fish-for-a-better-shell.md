@@ -1,5 +1,5 @@
 Title: Fish for a better shell
-Date: 2013-11-19 10:20
+Date: 2013-11-19 10:20 PM
 Category: Developer Tools
 Tags: fish, shell, bash
 Slug: fish-for-a-better-shell

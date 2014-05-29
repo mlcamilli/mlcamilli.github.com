@@ -1,5 +1,5 @@
 Title: Fail2ban: How I can sleep at night
-Date: 2013-11-09 8:20
+Date: 2013-11-09 8:20 PM
 Category: DevOps
 Tags: devops, fail2ban
 Slug: fail2ban-how-I-can-sleep-at-night
