@@ -34,7 +34,11 @@ THEME = "themes/camillitheme"
 
 TEMPLATE_PAGES = {
     'extra/about.html': 'about.html',
-    'extra/robots.txt': 'robots.txt'
+    'extra/robots.txt': 'robots.txt',
+    'extra/talks.html' : 'talks.html'
 }
 
-ARTICLE_EXCLUDES = (('pages','extra','drafts'))
+ARTICLE_EXCLUDES = (('pages','extra','drafts', 'talks'))
+STATIC_PATHS = [
+        'talks',
+]

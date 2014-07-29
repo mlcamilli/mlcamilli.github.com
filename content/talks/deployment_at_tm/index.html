@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Deployment at TrackMaven</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/trackmaven.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+                <section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ## Deployment at TrackMaven
+                        ![Alt text](lib/img/tm.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ## About Me
+
+                        Matt Camilli
+
+                        @mlcamilli
+
+                        matt@trackmaven.com
+
+                        http://mattcamilli.com
+
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ## The Product
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ![feed](lib/img/feed.png)
+                    </section>    
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ![alerts](lib/img/alerts.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ![brand](lib/img/brand.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ![brand2](lib/img/brand2.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                        ![visualizer](lib/img/visualizer.png)
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Purple.png">
+                        ## Where we were
+                        ![heroku](lib/img/heroku.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Purple.png">
+                        ![sadcorgi](lib/img/sadcorgi.jpg)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Purple.png">
+                        <script type="text/template">
+                        ### Problems
+                        * Suspect SLA (unplanned/poorly planned downtime) <!-- .element: class="fragment" data-fragment-index="1" -->
+                        * Scaling Cost <!-- .element: class="fragment" data-fragment-index="2" -->
+                        * Not enough control/insight <!-- .element: class="fragment" data-fragment-index="3" --> 
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_GoldonRod.png">
+                        ## Where we ended up
+                        ![aws](lib/img/aws.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_GoldonRod.png">
+                        ![happycorgi](lib/img/happycorgi.jpg)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_GoldonRod.png">
+                        <script type="text/template">
+                        ## Why AWS?
+                        * SLA <!-- .element: class="fragment" data-fragment-index="1" -->
+                        * Cheap (relatively) <!-- .element: class="fragment" data-fragment-index="2" -->
+                        * Unmanaged Options <!-- .element: class="fragment" data-fragment-index="3" -->
+                        * API (Necessary for having an effective custom solution) <!-- .element: class="fragment" data-fragment-index="4" -->
+                        </script>
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_GoldonRod.png">
+                        <script type="text/template">
+                        ## What we needed
+                        * Ability to access the project shell <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                        * Ability to easily scale <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                        * Deployments from source control <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                        * Ability to set environment variables <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                       ## Fabric 
+                        ![fabric](lib/img/fabric.jpg)
+                    </section>
+                    <section data-markdown>
+                        Fabric is a python command-line tool for streamlining the use
+                        of SSH for application deployment or systems administration tasks.
+
+                        We use it to provide an easy interface for our developers to interact
+                        with Ansible and Boto.
+                    </section>
+                    <section data-markdown>
+                        ## fab prod shell
+                        **fab** - Invokes a fabric command from the fabfile
+
+                        **prod** - Sets fabric's environment dictionary to production
+
+                        **shell** - Custom fabric method that will cd into the project directory on the host specified by the environment dictionary, and run the project shell                        
+                        ```python
+                        def shell():
+                            '''
+                            Calls the shell_plus of the TrackMaven project
+                            '''
+                            with env.cd(env.project_path):
+                                env.run('foreman run python trackmaven/manage.py shell_plus')
+                        ```
+                        </section>
+                        <section data-markdown>
+                            fab prod shell
+                            ![shell](lib/img/shell.png)
+                        </section>
+                </section>
+                <section>
+                    <section data-markdown>
+                        ## Boto
+                        ![corgicomp](lib/img/corgi_computer.jpg)
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        Python module that interacts with the infrastructural services of AWS.
+                        
+                        Enables us to:
+
+                        * Add/Remove instances <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                        * Control the load balancers <!-- .element: class="fragment" data-fragment-index="3" -->
+                        * Create and manage images <!-- .element: class="fragment" data-fragment-index="4" -->
+                        * Fetch instance data <!-- .element: class="fragment" data-fragment-index="5" -->
+                        </script>
+                    </section>
+                    <section data-markdown>
+                        ## Tagging
+                        ![tags](lib/img/tags.png)
+
+                        * Env - Prod, Puppystream, Puppycrate
+                        * Type - Web, Celery, Manager
+                        * Name - EnvType# (prodcelery1)
+                    </section>
+                    <section data-markdown>
+                            fab prod scale:web,3
+                    </section>
+                    <section data-markdown>
+                        ## AWSManager
+
+                        ```python
+                        from boto import ec2
+                        from boto.ec2 import elb
+
+
+                        class AWSManager():
+                            REGION = 'us-east-1'
+
+                            def __init__(self, env):
+                                if not env:
+                                    raise Exception('No environment set')
+                                self.env = env
+                                self.ec2 = ec2.connect_to_region(self.REGION,
+                                                                 profile_name="trackmaven")
+                                self.elb = elb.connect_to_region(self.REGION,
+                                                                 profile_name="trackmaven")
+                                                                 
+                            def scale_web(self, number):
+                                '''
+                                Scales the web workers to the number inputted
+                                '''
+                                web_instances = self._get_instances('web')
+                                if number > len(web_instances):
+                                    self._scale_up('web', number - len(web_instances))
+                                elif number < len(web_instances) and number >= 2:
+                                    self._scale_down('web', len(web_instances) - number)
+                                else:
+                                    raise Exception('Cannot scale below 2 web instances or scale the same number')
+
+                            def _scale_up(self, instance_type, number):
+                                '''
+                                Scales the specified instances up
+                                '''
+                                # Fetch the main instance to base the new instances off of
+                                instances = self._get_instances(instance_type)
+                                main = next(instance for instance in instances
+                                            if '1' in instance.tags.get('Name'))
+                                image = self.ec2.get_all_images(owners='self', filters={
+                                    'tag:Name': main.tags.get('Name')}).pop()
+                                for i in range(0, number):
+                                    reservation = self.ec2.run_instances(
+                                        image.id,
+                                        key_name=main.key_name,
+                                        security_groups=[group.name for group in main.groups],
+                                        instance_type=main.instance_type,
+                                        placement=main.placement
+                                    )
+                                    instance = reservation.instances[0]
+                                    # Add the proper tags
+                                    instance.add_tag('env', self.env)
+                                    instance.add_tag('type', instance_type)
+                                    instance.add_tag('Name', '{}{}{}'.format(
+                                        self.env, instance_type, len(instances) + 1 + (i * 1)))
+
+                                    # If it is a web worker, register it with the elb
+                                    if instance_type == 'web':
+                                        self.elb.register_instances(self.env, [instance.id])
+
+                        ```
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                        ## Ansible
+                        ![ansible](lib/img/ansible.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                        Ansible is an open source orchestration engine that manages nodes over SSH. (Built on Python)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                    <script type="text/template">
+                    ## Playbooks
+                    *"Playbooks are the language by which Ansible orchestrates, configures, administers, or deploys systems."*
+
+                    Playbooks consist of plays which are mappings between a set of hosts and the tasks which run on those hosts.
+                    
+                    * Human Readable <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                    * YAML(With Jinja2) <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                    * Synchronous/Asynchronous <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                    * Extensive Module Support <!-- .element: class="fragment" data-fragment-index="4" -->
+                    </script>
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                        ## Modules
+                        ![module](lib/img/module.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                        ## Playbook Example
+                        
+                        ```
+                        ---
+                        - hosts: webservers
+                          vars:
+                            http_port: 80
+                            max_clients: 200
+                          remote_user: root
+                          tasks:
+                          - name: ensure apache is at the latest version
+                            yum: pkg=httpd state=latest
+                          - name: write the apache config file
+                            template: src=/srv/httpd.j2 dest=/etc/httpd.conf
+                            notify:
+                            - restart apache
+                          - name: ensure apache is running
+                            service: name=httpd state=started
+                          handlers:
+                            - name: restart apache
+                              service: name=httpd state=restarted
+                        ```
+
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Blue_copy.png">
+                        ## Inventory
+
+                        A file that describes Hosts and Groups in Ansible (INI or JSON)
+                        ```
+                        mail.example.com
+
+                        [webservers]
+                        foo.example.com
+                        bar.example.com
+
+                        [dbservers]
+                        one.example.com
+                        two.example.com
+                        three.example.com
+
+                        [webservers:vars]
+                        some_var=somevalue
+                        ```
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        ## Deployment
+                        ![maven](lib/img/maven.png)
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        fab prod deploy
+
+                            ENVRIONMENT=prod ansible-playbook deployment/playbooks/deploy.yml
+                            -i deployment/hosts -e "branch=master"
+                    </section>
+                     <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        -i deployment/hosts
+                        ```python
+                        from boto import ec2
+                        import os, json
+
+
+                        def main():
+                            instances = {}
+                            instances['_meta'] = { 'hostvars': {}}
+
+                            env = os.environ.get('ENVIRONMENT')
+                            conn = ec2.connect_to_region('us-east-1', profile_name='trackmaven')
+                            prod_reservations = ec2.get_all_instances(filters={'tag:env': env})
+
+                            for reservation in prod_reservations:
+                              for instance in reservation.instances:
+                                instance_type = instance.tags.get('type')
+                                # Group instances by type
+                                instances.setdefault(instance_type, 
+                                  []).append(instance.public_dns_name)
+                                # Group instances by name
+                                instances.setdefault(instance.tags.get('Name'), 
+                                  []).append(instance.public_dns_name)
+                                # Set instance specific variables
+                                instances['_meta']['hostvars'][instance.public_dns_name] = {
+                                  'type': instance_type,
+                                  'env': env,
+                                  'id': instance.id,
+                                  'region': 'us-east-1'
+                                }
+                            print json.dumps(instances)
+
+                        main()
+                        ```
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        output
+                        ```
+                        {  
+                           "prodweb1":[  
+                              "made-up-web1.compute-1.amazonaws.com"
+                           ],
+                           "web":[  
+                              "made-up-web1.compute-1.amazonaws.com",
+                              "made-up-web2.compute-1.amazonaws.com"
+                           ],
+                           "all":[  
+                              "made-up-web1.compute-1.amazonaws.com",
+                              "made-up-web2.compute-1.amazonaws.com",
+                              "made-up-celery1.compute-1.amazonaws.com",
+                              "made-up-manager1.compute-1.amazonaws.com"
+                           ],
+                           "prodweb2":[  
+                              "made-up-web2.compute-1.amazonaws.com"
+                           ],
+                           "prodcelery1":[
+                              "made-up-celery1.compute-1.amazonaws.com"
+                           ],
+                           "prodmanager1"[
+                              "made-up-manager1.compute-1.amazonaws.com"
+                           ],
+                           "celery":[
+                              "made-up-celery1.compute-1.amazonaws.com"
+                           ],
+                           "manager":[
+                              "made-up-manager1.compute-1.amazonaws.com"
+                           ],
+                           "_meta":{  
+                              "hostvars":{  
+                                 "made-up-web1.compute-1.amazonaws.com":{  
+                                    "type":"web",
+                                    "env":"prod",
+                                    "id":"someid",
+                                    "region":"us-east-1"
+                                 }
+                              }
+                           }
+                            
+                        }
+                        ```
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        playbooks/deploy.yml
+
+                        ```
+                        ---
+                        - hosts : web
+                          vars:
+                            branch : "{{branch}}"
+                          roles:
+                              - deploy
+                          serial: 1
+
+                        - hosts : celery:manager
+                          vars:
+                            branch : "{{branch}}"
+                          roles:
+                              - deploy
+                        ```
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        roles/deploy/tasks/main.yml
+
+                        ```
+                        ---
+                        - name: Instance De-register
+                          local_action: ec2_elb
+                          args:
+                            instance_id: "{{ hostvars[inventory_hostname].id}}"
+                            state: 'absent'
+                            profile: 'trackmaven'
+                            ec2_elbs: "{{ hostvars[inventory_hostname].env}}"
+                            wait: 'yes'
+                            wait_timeout: 10
+                            region: "{{ hostvars[inventory_hostname].region }}"
+                          when: '"{{ hostvars[inventory_hostname].type }}" == "web"'
+
+
+                        - include: deploy.yml
+
+                        - name: Instance Register
+                          local_action: ec2_elb
+                          args:
+                            instance_id: "{{ hostvars[inventory_hostname].id}}"
+                            state: 'present'
+                            profile: 'trackmaven'
+                            ec2_elbs: "{{ hostvars[inventory_hostname].env}}"
+                            wait: 'yes'
+                            wait_timeout: 20
+                            region: "{{ hostvars[inventory_hostname].region }}"
+                          when: '"{{ hostvars[inventory_hostname].type }}" == "web"'
+                          ```
+                    </section>
+                    <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Green.png">
+                        roles/deploy/tasks/deploy.yml
+
+                        ```
+                        ---
+
+                        - name: turn on maintenance mode
+                          sudo: yes
+                          command: chdir=/home/web/www/ touch maintenance
+                          when: '"{{ hostvars[inventory_hostname].type }}" == "web"'
+
+                        - name: shut down supervisor
+                          sudo: yes
+                          service: name=supervisor state=stopped
+
+                        - name: pull the latest code
+                          git: repo=git@github.com:TrackMaven/TrackMaven.git dest=/home/web/www/TrackMaven force=yes update=yes version={{branch}}
+
+                        - name: install lastest requirements
+                          pip: requirements=/home/web/www/TrackMaven/requirements.txt virtualenv=/home/web/www/.virtualenvs/trackmaven
+
+                        - name: recreate supervisor conf files
+                          sudo: yes
+                          command: chdir=/home/web/www/TrackMaven/  /home/web/www/.virtualenvs/trackmaven/bin/python deployment/export.py -p {{ hostvars[inventory_hostname].procfile }}
+
+                        - name: remove pycs
+                          command: chdir=/home/web/www/TrackMaven/ find . -name '*.pyc' -delete
+
+                        - name: start supervisor
+                          sudo: yes
+                          service: name=supervisor state=started
+
+                        - name: Django collectstatic
+                          command: chdir=/home/web/www/TrackMaven/ foreman run python trackmaven/manage.py collectstatic --noinput
+
+                        - name: turn off maintenance mode
+                          sudo: yes
+                          command: chdir=/home/web/www/ rm maintenance
+                          when: '"{{ hostvars[inventory_hostname].type }}" == "web"'
+
+                        ```
+                    </section>
+                </section>
+                <section data-markdown data-background="lib/img/tm_shatterbackground_2014_Red.png">
+                    ## Questions?
+                    ![sunglasses](lib/img/sunglasses.jpg)
+                </section>
+			</div>
+		</div>
+<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
