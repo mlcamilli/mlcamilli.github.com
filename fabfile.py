@@ -4,6 +4,7 @@ from datetime import datetime
 from pytz import timezone
 import shutil
 import os
+import re
 
 
 # Local path configuration (can be absolute or relative to fabfile)
@@ -73,7 +74,7 @@ def cf_upload():
 
 
 def new(article_name):
-    slug = article_name.lower().replace(' ', '-')
+    slug = re.sub(r'[^a-zA-Z0-9 ]', '', article_name.lower()).replace(' ', '-')
     filename = slug + '.md'
     with open('content/drafts/{}'.format(filename), 'w') as writer:
         writer.write('Title: {}\n'.format(article_name))

@@ -36,7 +36,7 @@ def _get_post_details(text):
     for item in ['Title', 'Slug', 'Description', 'Date']:
         i_start = text.find('{}:'.format(item))
         i_end = i_start + text[i_start:].find('\n')
-        detail = text[i_start:i_end].replace('{}:'.format(item), '')
+        detail = text[i_start:i_end].replace('{}:'.format(item), '').strip()
         if item == 'Slug':
             detail = '{}{}.html'.format(DOMAIN, detail)
         details.append(detail.strip())
