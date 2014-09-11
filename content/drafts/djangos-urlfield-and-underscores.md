@@ -4,7 +4,12 @@ Category:Django
 Tags:django,urlfield,validator,regex
 Slug: django's-urlfield-and-underscores
 Author: Matt Camilli
-Description: 
+Description: A week ago The Engine Room was faced with a problem. A customer was trying to
+add a blog to our system with a subdomain that had an underscore in it. While
+a frowned upon convention(as domains cannot have underscores) it is still
+a valid url. The problem arose because Django's default URLField does not allow
+any underscores, and threw ValidationErrors upon saves. So we implemented our
+own!
 
 
 A week ago The Engine Room was faced with a problem. A customer was trying to
@@ -19,7 +24,10 @@ fixing it as URLFields abide by official rules (RFC 1034/1035).
 While this is all well and dandy we still needed the ability to add blog urls
 with underscores in their subdomains. The solution was to implement our own
 URLField, which would be identical to Django's with the exception of a more
-fine tuned validator. 
+fine tuned validator. After perusing the Django github repo we simply copied
+their basic URLValidator and changed the regex to make it allow underscores in
+only subdomains.
+
 
 ```python
 from django.core.exceptions import ValidationError
