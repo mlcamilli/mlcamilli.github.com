@@ -1,5 +1,5 @@
 Title: Django's URLField and Underscores
-Date: 2014-08-27
+Date: 2014-09-18
 Category:Django 
 Tags:django,urlfield,validator,regex
 Slug: django's-urlfield-and-underscores
