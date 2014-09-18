@@ -4,12 +4,7 @@ Category:Django
 Tags:django,urlfield,validator,regex
 Slug: django's-urlfield-and-underscores
 Author: Matt Camilli
-Description: A week ago The Engine Room was faced with a problem. A customer was trying to
-add a blog to our system with a subdomain that had an underscore in it. While
-a frowned upon convention(as domains cannot have underscores) it is still
-a valid url. The problem arose because Django's default URLField does not allow
-any underscores, and threw ValidationErrors upon saves. So we implemented our
-own!
+Description: A week ago The Engine Room was faced with a problem. A customer was trying to add a blog to our system with a subdomain that had an underscore in it. While a frowned upon convention(as domains cannot have underscores) it is still a valid url. The problem arose because Django's default URLField does not allow any underscores, and threw ValidationErrors upon saves. So we implemented ourown!
 
 
 A week ago The Engine Room was faced with a problem. A customer was trying to
@@ -44,7 +39,8 @@ class BetterURLValidator(RegexValidator):
     """
     regex = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
-        r'(?:(?:(?:[A-Z0-9](?:[A-Z0-9-_]{0,61}[A-Z0-9])?\.)?'  # subdomain...
+        r'(?:(?:(?:[A-Z0-9](?:[A-Z0-9-_]{0,61}[A-Z0-9])?\.)?'  # Subdomain that
+        allow underscores
         r'(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}(?<!-)\.))|' # domain
         r'localhost|'  # localhost...
         r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'  # ...or ipv4
@@ -89,3 +85,6 @@ class BetterURLField(models.URLField):
     def __init__(self, verbose_name=None, name=None, **kwargs):
         super(BetterURLField, self).__init__(verbose_name, name, **kwargs)
 ```
+
+**Note** The only use case where this doesn't quite work is with `.co.uk`
+domains. 
