@@ -1,0 +1,98 @@
+/**
+ * Default theme for reveal.js.
+ *
+ * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../../lib/font/proximanova-regular-webfont.eot');
+    src: url('../../lib/font/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../lib/font/proximanova-regular-webfont.woff') format('woff'),
+         url('../../lib/font/proximanova-regular-webfont.ttf') format('truetype'),
+         url('../../lib/font/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+    font-style: normal;
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+
+// Override theme settings (see ../template/settings.scss)
+$heading1TextShadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 20px 20px rgba(0,0,0,.15);
+
+$shatterpath: '../../lib/img/tm_shatterbackground_2014_';
+$filetype: '.png';
+@mixin shatterBackground($color) {
+    background: {
+        image: url(#{$shatterpath}#{$color}#{$filetype});
+    }
+}
+
+.shatter-blue {
+    @include shatterBackground('Blue copy');
+}
+
+.shatter-darkgrey {
+    @include shatterBackground('DarkGrey');
+}
+
+.shatter-gold {
+    @include shatterBackground('GoldonRod');
+}
+
+.shatter-green {
+    @include shatterBackground('Green');
+}
+
+.shatter-lightred {
+    @include shatterBackground('Light-Red');
+}
+
+// Primary/body text
+$mainFont: 'Proxima Nova';
+$mainFontSize: 36px;
+$mainColor: #eee;
+
+// Headings
+$headingFont: 'Proxima Nova';
+
+
+
+
+// Background generator
+@mixin bodyBackground() {
+    @include shatterBackground('DarkGrey');
+}
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+.reveal section img {
+	margin: 0 !important;
+	background: none !important;
+	border: 0 !important;
+
+	box-shadow: none !important;
+
+	-webkit-transition: all .2s linear;
+	   -moz-transition: all .2s linear;
+	    -ms-transition: all .2s linear;
+	     -o-transition: all .2s linear;
+	        transition: all .2s linear;
+}
+
+	.reveal a:hover img {
+		background: none !important;
+		border-color: none !important;
+
+		box-shadow: none !important;
+	}
+
+

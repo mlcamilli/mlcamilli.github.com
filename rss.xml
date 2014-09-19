@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+  <title>Matt Camilli's Blog</title>
+  <link>http://mattcamilli.com</link>
+  <description>It's Something</description>
+  <pubDate>2014-09-19</pubDate>
+  
+<item>
+<title>Fail2ban: How I can sleep at night</title>
+<link>http://mattcamilli.com/fail2ban-how-I-can-sleep-at-night.html</link>
+<description>How to set up fail2ban to stop those pesky brute force hackers from ruining your day.</description>
+<pubDate>2013-11-09</pubDate>
+</item>
+
+
+<item>
+<title>Fish for a better shell</title>
+<link>http://mattcamilli.com/fish-for-a-better-shell.html</link>
+<description>Put some power into your shell and upgrade to fish. http://fishshell.com/</description>
+<pubDate>2013-11-19</pubDate>
+</item>
+
+
+<item>
+<title>Locking down your ssh</title>
+<link>http://mattcamilli.com/locking-down-your-ssh.html</link>
+<description>So SSH is great, I use it just about everyday. I ssh into my linode as root like a baus and use password authentication because no one is gonna guess my password which is my last name twice, right?</description>
+<pubDate>2010-12-03</pubDate>
+</item>
+
+
+<item>
+<title>Django's URLField and Underscores</title>
+<link>http://mattcamilli.com/django's-urlfield-and-underscores.html</link>
+<description>A week ago The Engine Room was faced with a problem. A customer was trying to add a blog to our system with a subdomain that had an underscore in it. While a frowned upon convention(as domains cannot have underscores) it is still a valid url. The problem arose because Django's default URLField does not allow any underscores, and threw ValidationErrors upon saves. So we implemented ourown!</description>
+<pubDate>2014-09-18</pubDate>
+</item>
+
+
+<item>
+<title>The Glory of Redis Pipelines</title>
+<link>http://mattcamilli.com/glory-of-redis-pipelines.html</link>
+<description>Save yourself and your app a lot of overhead and connection time by using pipelines to drastically increase performance.</description>
+<pubDate>2014-01-23</pubDate>
+</item>
+
+</channel>
+</rss>
