@@ -82,7 +82,6 @@ def new(article_name):
             datetime.now()).strftime('%Y-%m-%d')))
         writer.write('Category: \n')
         writer.write('Tags: \n')
-        writer.write('Slug: {}\n'.format(slug))
         writer.write('Author: Matt Camilli\n')
         writer.write('Description: \n')
 
